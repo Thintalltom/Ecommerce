@@ -102,6 +102,39 @@ const CartPage = () => {
     }
   };
 
+const senderemail ='adeyanjutomide@gmail.com'
+  const handleSellerMail = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "https://email-sender-98we.vercel.app/api/notify-email",
+        {
+          email: senderemail,
+          orderSummary: cartItems,
+        }
+      );
+      setTimeout(() => {
+        setEmailSent(true);
+        setEmail("");
+        setTimeout(() => setEmailSent(false), 3000);
+      }, 1000);
+      console.log(response);
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+  };
+
+  const sendMail = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+  
+  
+     await handleSender(e),
+    await  handleSellerMail(e)
+  
+  };
+  
+  
+
   return (
     <div className="bg-[#F9F6F2] pt-24 pb-16 min-h-screen w-full">
       <div className="container mx-auto px-4">
@@ -212,7 +245,7 @@ const CartPage = () => {
                   someone else.
                 </p>
                 <form
-                  onSubmit={handleSender}
+                  onSubmit={sendMail}
                   className="flex flex-col sm:flex-row gap-3"
                 >
                   <input

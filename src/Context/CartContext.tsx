@@ -15,7 +15,7 @@ export const CartProvider = ({ children }: any) => {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
         setFormData((prevData) => ({...prevData, [name]: value}));
-        console.log(formData) 
+         
     };
     const [products, setProducts] = useState([]);
     const getProduct = async () => {
@@ -24,7 +24,7 @@ export const CartProvider = ({ children }: any) => {
             "https://fakestoreapi.com/products"
           );
           setProducts(response.data);
-          console.log(response.data);
+         
          
         } catch (error) {
           console.error("Error fetching products:", error);
