@@ -1,7 +1,7 @@
 import express from "express";
 import Order from "../models/Order.js";
 import mongoose from "mongoose";
-import Ecommerce from "../models/Ecommerce";
+import Ecommerce from "../models/Ecommerce.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -29,8 +29,7 @@ router.post("/", async (req, res) => {
     }
     const newOrder = new Order({
       products,
-      totalAmount,
-      createdAt: new Date(),
+      totalAmount
     });
 
     await newOrder.save({ session });
@@ -39,9 +38,11 @@ router.post("/", async (req, res) => {
     res
       .status(201)
       .json({ message: "Order placed successfully", order: newOrder });
+
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
     res.status(500).json({ message: error.message });
   }
 });
+export default router;
