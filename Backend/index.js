@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use('/api/products', EcomRoutes);
+app.use('/api/product', EcomRoutes);
 app.use('/api/orders', OrderRoute)
 
 const PORT = process.env.PORT || 5000;

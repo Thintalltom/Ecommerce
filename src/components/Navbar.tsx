@@ -25,7 +25,7 @@ const Navbar = () => {
             <Link to="/products" className="text-[#1A2A4A] hover:text-[#D4AF37] transition-colors">
               Jewelry
             </Link>
-            <div className="absolute hidden group-hover:block bg-white shadow-lg p-4 w-48 mt-2">
+            {/* <div className="absolute hidden group-hover:block bg-white shadow-lg p-4 w-48 mt-2">
               <Link to="/products?category=necklaces" className="block py-2 text-[#1A2A4A] hover:text-[#D4AF37]">
                 Necklaces
               </Link>
@@ -38,13 +38,13 @@ const Navbar = () => {
               <Link to="/products?category=rings" className="block py-2 text-[#1A2A4A] hover:text-[#D4AF37]">
                 Rings
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="group relative">
             <Link to="/products" className="text-[#1A2A4A] hover:text-[#D4AF37] transition-colors">
               Shoes
             </Link>
-            <div className="absolute hidden group-hover:block bg-white shadow-lg p-4 w-48 mt-2">
+            {/* <div className="absolute hidden group-hover:block bg-white shadow-lg p-4 w-48 mt-2">
               <Link to="/products?category=heels" className="block py-2 text-[#1A2A4A] hover:text-[#D4AF37]">
                 Heels
               </Link>
@@ -57,13 +57,13 @@ const Navbar = () => {
               <Link to="/products?category=sneakers" className="block py-2 text-[#1A2A4A] hover:text-[#D4AF37]">
                 Sneakers
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="group relative">
             <Link to="/products" className="text-[#1A2A4A] hover:text-[#D4AF37] transition-colors">
               Bags
             </Link>
-            <div className="absolute hidden group-hover:block bg-white shadow-lg p-4 w-48 mt-2">
+            {/* <div className="absolute hidden group-hover:block bg-white shadow-lg p-4 w-48 mt-2">
               <Link to="/products?category=handbags" className="block py-2 text-[#1A2A4A] hover:text-[#D4AF37]">
                 Handbags
               </Link>
@@ -76,7 +76,7 @@ const Navbar = () => {
               <Link to="/products?category=backpacks" className="block py-2 text-[#1A2A4A] hover:text-[#D4AF37]">
                 Backpacks
               </Link>
-            </div>
+            </div> */}
           </div>
           <Link to="/about" className="text-[#1A2A4A] hover:text-[#D4AF37] transition-colors">
             About

@@ -1,27 +1,23 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Link } from "react-router-dom";
+import { cartContextHook } from "../Context/CartContext";
 import { ShoppingBagIcon, HeartIcon } from "lucide-react";
 interface ProductCardProps {
   id: number;
   title: string;
-  price: number;
-  image: string;
-  category: string;
   isNew?: boolean;
   isSale?: boolean;
   salePrice?: number;
+  category: string;
+  description: string;
+  image: string;
+  name: string;
+  price: number;
+  stock: number;
 }
-const ProductCard = ({
-  id,
-  title,
-  price,
-  image,
-  category,
-  isNew = false,
-  isSale = false,
-  salePrice,
-}: ProductCardProps) => {
+const ProductCard = ({product}: any) => {
   const [isHovered, setIsHovered] = useState(false);
+   
   return (
     <div
       className="group relative"
@@ -30,14 +26,15 @@ const ProductCard = ({
     >
       {/* Product Image */}
       <div className="relative overflow-hidden aspect-[3/4] bg-gray-100 rounded-sm mb-3">
-        <Link to={`/products/${id}`}>
+        <Link to={`/products/${product._id}`}>
           <img
-            src={image}
-            alt={title}
+            src={product.image}
+            alt={product.category}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            
           />
         </Link>
-        {/* Quick Action Buttons */}
+      
         <div
           className={`absolute bottom-0 left-0 right-0 bg-white bg-opacity-95 p-3 flex justify-between transition-transform duration-300 ${
             isHovered ? "translate-y-0" : "translate-y-full"
@@ -55,7 +52,7 @@ const ProductCard = ({
           </button>
         </div>
         {/* Product Badges */}
-        <div className="absolute top-2 left-2 flex flex-col gap-1">
+        {/* <div className="absolute top-2 left-2 flex flex-col gap-1">
           {isNew && (
             <span className="bg-[#1A2A4A] text-white text-xs px-2 py-1 rounded">
               New
@@ -66,17 +63,17 @@ const ProductCard = ({
               Sale
             </span>
           )}
-        </div>
+        </div> */}
       </div>
       {/* Product Info */}
       <div>
-        <p className="text-xs text-gray-500 uppercase mb-1">{category}</p>
-        <Link to={`/products/${id}`} className="block">
+        <p className="text-xs text-gray-500 uppercase mb-1">{product.category}</p>
+        <Link to={`/products/${product._id}`} className="block">
           <h3 className="text-[#1A2A4A] font-medium mb-1 hover:text-[#D4AF37] transition-colors">
-            {title}
+            {product.name}
           </h3>
         </Link>
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           {isSale && salePrice ? (
             <>
               <span className="text-[#D4AF37] font-medium">
@@ -91,7 +88,7 @@ const ProductCard = ({
               ${price.toFixed(2)}
             </span>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

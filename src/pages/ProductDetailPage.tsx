@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ShoppingBagIcon, HeartIcon, StarIcon, ChevronRightIcon, MinusIcon, PlusIcon, ShareIcon, TruckIcon, RotateCwIcon, ShieldCheckIcon } from 'lucide-react';
 import Button from '../components/Button';
+import { cartContextHook } from "../Context/CartContext";
 import ProductCard from '../components/ProductCard';
 import axios from 'axios';
 const ProductDetailPage = () => {
@@ -44,7 +45,7 @@ const [product, setProduct] = useState({} as any);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`https://fakestoreapi.com/products/${id}`);
+        const res = await axios.get(`http://localhost:5000/api/product/${id}`);
         setProduct(res.data);
         console.log(product)
       } catch (err) {
@@ -96,11 +97,7 @@ const [product, setProduct] = useState({} as any);
             Home
           </Link>
           <ChevronRightIcon size={16} className="mx-2 text-gray-400" />
-          <Link to="/products" className="text-gray-500 hover:text-[#1A2A4A]">
-            {product.category}
-          </Link>
-          <ChevronRightIcon size={16} className="mx-2 text-gray-400" />
-          <Link to={`/products`} className="text-gray-500 hover:text-[#1A2A4A]">
+          <Link to={`/products?category=${product.category}`} className="text-gray-500 hover:text-[#1A2A4A]">
             {product.category}
           </Link>
           <ChevronRightIcon size={16} className="mx-2 text-gray-400" />

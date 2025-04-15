@@ -23,7 +23,7 @@ export function App() {
           <Route path="payment" element={<PaymentPage />} />
           <Route path="tracking" element={<OrderTrackingPage />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<div>404 Not Found</div>} />
+          <Route path="*" element={<div  className="bg-[#F9F6F2] pt-24 pb-16 min-h-screen flex justify-center items-center font-bold text-2xl w-full">404 Not Found</div>} />
         </Route>
       </Routes>
     </BrowserRouter>;

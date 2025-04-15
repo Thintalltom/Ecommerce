@@ -82,7 +82,7 @@ const HomePage = () => {
       name: "Jewelry",
       image:
         "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-      link: "/products?category=jewelry",
+      link: "/products",
     },
     {
       name: "Shoes",
@@ -233,9 +233,9 @@ const HomePage = () => {
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
+            {/* {featuredProducts.map((product) => (
+              <ProductCard key={product._id} {...product} />
+            ))} */}
           </div>
         </div>
       </section>
