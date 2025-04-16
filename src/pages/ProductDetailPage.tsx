@@ -1,47 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { ShoppingBagIcon, HeartIcon, StarIcon, ChevronRightIcon, MinusIcon, PlusIcon, ShareIcon, TruckIcon, RotateCwIcon, ShieldCheckIcon } from 'lucide-react';
+import  { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { ShoppingBagIcon,  ChevronRightIcon, MinusIcon, PlusIcon, ShareIcon, TruckIcon, RotateCwIcon, ShieldCheckIcon } from 'lucide-react';
 import Button from '../components/Button';
-import { cartContextHook } from "../Context/CartContext";
-import ProductCard from '../components/ProductCard';
 import axios from 'axios';
 const ProductDetailPage = () => {
   const {
     id
   } = useParams();
-  const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  // Mock product data
-  // const product = {
-  //   id: Number(id),
-  //   name: 'Diamond Pendant Necklace',
-  //   price: 1299.99,
-  //   rating: 4.8,
-  //   reviewCount: 124,
-  //   description: 'Elegant diamond pendant necklace crafted with 18K white gold. The perfect statement piece for any special occasion. Features a 0.5 carat brilliant cut diamond with exceptional clarity and sparkle.',
-  //   details: ['18K white gold chain and setting', '0.5 carat brilliant cut diamond (VS clarity)', '16-inch chain with 2-inch extender', 'Lobster clasp closure', 'Comes in a luxury gift box'],
-  //   images: ['https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1586878341520-7b299c0af9ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1631982690223-8aa4be0a2058?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80'],
-  //   category: 'Jewelry',
-  //   subcategory: 'Necklaces',
-  //   colors: [{
-  //     name: 'Silver',
-  //     value: '#E0E0E0'
-  //   }, {
-  //     name: 'Gold',
-  //     value: '#D4AF37'
-  //   }, {
-  //     name: 'Rose Gold',
-  //     value: '#E0BFB8'
-  //   }],
-  //   sizes: ['14"', '16"', '18"', '20"'],
-  //   inStock: true,
-  //   sku: 'JWL-DN-1001'
-  // };
-  // Related products
-
-const [product, setProduct] = useState({} as any);
+  const [product, setProduct] = useState({} as any);
+  const orders  = {
+    products: [
+      {
+        productId: product._id,
+        quantity: quantity,
+        price: product.price,
+        name: product.name,
+        image: product.image
+      }
+    ],
+    totalAmount: product.price * quantity
+  }
+  const navigate = useNavigate();
+  const addOrder = async () => {
+    const res = await axios.post('http://localhost:5000/api/orders', orders);
+    if(res.status === 201) {
+      alert('Order added successfully');
+      navigate('/cart')
+    }
+  }
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -55,32 +42,6 @@ const [product, setProduct] = useState({} as any);
 
     fetchProduct();
   }, [id]);
-  const relatedProducts = [{
-    id: 2,
-    name: 'Gold Hoop Earrings',
-    price: 249.99,
-    imageUrl: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    category: 'Jewelry',
-    isNew: true
-  }, {
-    id: 3,
-    name: 'Sapphire Tennis Bracelet',
-    price: 899.99,
-    imageUrl: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    category: 'Jewelry'
-  }, {
-    id: 8,
-    name: 'Platinum Wedding Band',
-    price: 799.99,
-    imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    category: 'Jewelry'
-  }, {
-    id: 9,
-    name: 'Pearl Drop Earrings',
-    price: 329.99,
-    imageUrl: 'https://images.unsplash.com/photo-1589128777073-263566ae5e4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    category: 'Jewelry'
-  }];
   const incrementQuantity = () => {
     setQuantity(prev => prev + 1);
   };
@@ -181,7 +142,7 @@ const [product, setProduct] = useState({} as any);
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Button variant="primary" size="lg" fullWidth>
+              <Button variant="primary" size="lg" fullWidth onClick={addOrder}>
                 <ShoppingBagIcon size={18} className="mr-2" />
                 Add to Bag
               </Button>
@@ -230,15 +191,6 @@ const [product, setProduct] = useState({} as any);
                 <h3 className="text-lg font-medium mb-4">Description</h3>
                 <p className="text-gray-600">{product.description}</p>
               </div>
-              {/* <div>
-                <h3 className="text-lg font-medium mb-4">Details</h3>
-                <ul className="space-y-2">
-                  {product.details.map((detail, index) => <li key={index} className="flex items-start">
-                      <span className="text-[#D4AF37] mr-2">•</span>
-                      <span className="text-gray-600">{detail}</span>
-                    </li>)}
-                </ul>
-              </div> */}
             </div>
           </div>
         </div>

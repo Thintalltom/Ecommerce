@@ -13,10 +13,10 @@ const HomePage = () => {
   const heroSlides = [
     {
       id: 1,
-      title: "Elegant Jewelry Collection",
+      title: "Elegant Jean Collection",
       subtitle: "Timeless pieces for every occasion",
-      cta: "Shop Jewelry",
-      link: "/products?category=jewelry",
+      cta: "Shop Jeans",
+      link: "/products?category=Jeans",
       image:
         "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
     },
@@ -25,7 +25,7 @@ const HomePage = () => {
       title: "Luxury Footwear",
       subtitle: "Step into style with our premium shoes",
       cta: "Shop Shoes",
-      link: "/products?category=shoes",
+      link: "/products?category=Shoe",
       image:
         "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
     },
@@ -34,7 +34,7 @@ const HomePage = () => {
       title: "Designer Bags",
       subtitle: "Complete your look with our exclusive collection",
       cta: "Shop Bags",
-      link: "/products?category=bags",
+      link: "/products?category=Bag",
       image:
         "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
     },

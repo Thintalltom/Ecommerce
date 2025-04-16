@@ -35,7 +35,7 @@ export const CartProvider = ({ children }: any) => {
   const getProduct = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/product");
-      console.log(response.data);
+
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
