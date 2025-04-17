@@ -16,6 +16,7 @@
     "express": "^5.1.0",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
+    "redis": "^4.7.0",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
