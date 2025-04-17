@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import EcomRoutes from './Routes/EcomRoutes.js';
 import OrderRoute from './Routes/OrderRoute.js';
+
 dotenv.config();
 const app = express();
 

@@ -1,12 +1,13 @@
 import express from "express";
 import ECommerce from "../models/Ecommerce.js";
-import redisClient from "../models/redisClient.js";
+import cache from "memory-cache";
 const router = express.Router();
 
 //Create Data
 router.post("/", async (req, res) => {
   try {
     const commerce = new ECommerce(req.body);
+
     await commerce.save();
     res.status(201).json(commerce);
   } catch (error) {
@@ -17,16 +18,22 @@ router.post("/", async (req, res) => {
 //Read Data
 router.get("/", async (req, res) => {
   try {
-    const cacheKey = "products:all";
-    const cachedData = await redisClient.get(cacheKey);
+    const { category, price } = req.query;
+    const filter = {};
+    if (price) filter.category = category;
+    if (price) filter.price = price;
+    const cacheKey = "all_products";
+    const cachedData = cache.get(cacheKey);
+
     if (cachedData) {
-      console.log("Data from cache");
-      return res.status(200).json(JSON.parse(cachedData));
+      console.log(" Serving from memory-cache");
+      return res.status(200).json(cachedData);
     }
 
     const commerce = await ECommerce.find();
-    await redisClient.setEx(cacheKey, 60, JSON.stringify(commerce));
     res.status(200).json(commerce);
+    cache.put(cacheKey, commerce, 600000);
+    console.log(" Serving from MongoDB and caching it");
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -36,17 +43,9 @@ router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const product = await ECommerce.findById(id);
-    const cacheKey = `products:${id}`;
-
-    const cachedProduct = await redisClient.get(cacheKey);
-    if (cachedProduct) {
-      console.log("Serving product from cache...");
-      return res.status(200).json(JSON.parse(cachedProduct));
-    }
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
-    await redisClient.setEx(cacheKey, 60, JSON.stringify(product)); 
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
